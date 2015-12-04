@@ -1,0 +1,60 @@
+/**
+ * Vars stylesheet
+ *
+ * Table of contents
+ * 1) Breakpoints
+ * 2) Colours
+ * 3) Typography
+ * 4) Layout
+ * 5) Z-index
+ */
+
+
+
+/**
+ * 1) Breakpoints
+ */
+
+ $bp1: 30em;
+ $bp2: 48em;
+ $bp3: 62em;
+ $bp4: 78em;
+ $bp5: 87em;
+
+
+
+/**
+ * 2) Colours
+ */
+
+ $color-text: #222222;
+ $color-bg: #f9f9f9;
+
+
+
+/**
+ * 3) Typography
+ */
+
+ $font-sans: "";
+ $font-serif: "";
+
+
+
+/**
+ * 4) Layout
+ */
+
+ $baseline: 1em;
+
+
+
+/**
+ * 5) Z-index
+ */
+
+ $z-index-1: 1;
+ $z-index-2: 5;
+ $z-index-3: 10;
+ $z-index-4: 15;
+ $z-index-5: 20;

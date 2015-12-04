@@ -1,0 +1,62 @@
+/**
+ * Base stylesheet
+ *
+ * This stylesheet imports all Base partials.
+ *
+ * Table of contents
+ * 1) Defaults
+ * 2) Elements
+ * 3) Forms
+ * 4) Lists
+ * 5) Tables
+ * 6) Typography
+ */
+
+
+
+/**
+ * 1) Defaults
+ */
+
+@import "defaults.scss";
+
+
+
+/**
+ * 2) Elements
+ */
+
+@import "elements.scss";
+
+
+
+/**
+ * 3) Forms
+ */
+
+@import "forms.scss";
+
+
+
+/**
+ * 4) Lists
+ */
+
+@import "lists.scss";
+
+
+
+/**
+ * 5) Tables
+ */
+
+@import "tables.scss";
+
+
+
+/**
+ * 6) Typography
+ */
+
+@import "typography.scss";
+

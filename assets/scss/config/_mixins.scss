@@ -1,0 +1,31 @@
+/**
+ * Mixins stylesheet
+ *
+ * Table of contents
+ * 1) Respond (min)
+ * 2) Respond (max)
+ */
+
+
+
+/**
+ * 1) Respond (min)
+ */
+
+ @mixin respond-min($width) {
+  @media screen and (min-width: $width) {
+    @content;
+  }
+ }
+
+
+
+/**
+ * 2) Respond (max)
+ */
+
+ @mixin respond-max($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+ }

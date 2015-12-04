@@ -1,0 +1,35 @@
+/**
+ * Config stylesheet
+ *
+ * This stylesheet imports all Config partials.
+ *
+ * Table of contents
+ * 1) Variables
+ * 2) Mixins
+ * 3) Bower components
+ */
+
+
+
+/**
+ * 1) Variables
+ */
+
+@import "vars.scss";
+
+
+
+/**
+ * 2) Mixins
+ */
+
+@import "mixins.scss";
+
+
+
+/**
+ * 3) Bower components
+ */
+
+@import "bower.scss";
+
