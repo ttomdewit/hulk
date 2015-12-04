@@ -7,11 +7,12 @@
  * Table of contents
  * 1) Load plugins
  * 2) Styles
- * 3) Modernizr
- * 4) Scripts
- * 5) Images
- * 6) SVG
- * 7) Watch
+ * 3) Scripts
+ * 4) Images
+ * 5) SVG
+ * 6) Clean
+ * 7) Default
+ * 8) Watch
  */
 
 
@@ -23,7 +24,7 @@
  */
 
  var gulp = require('gulp'),
-     sass = require('gulp-sass'),
+     sass = require('gulp-ruby-sass'),
      autoprefixer = require('gulp-autoprefixer'),
      minifycss = require('gulp-minify-css'),
      jshint = require('gulp-jshint'),
@@ -41,13 +42,57 @@
 /**
  * 2) Styles
  *
- * [[ Explain what this Gulp task does ]].
+ * First find all .scss-files withing the /assets/scss/ directory,
+ * after that autoprefix what's necessary, then minify, finally move
+ * to /assets/dist/css/style.css.
  */
+
+ gulp.task('styles', function() {
+   return sass('assets/scss/styles.scss', { style: 'expanded' })
+   .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
+   .pipe(minifycss())
+   .pipe(gulp.dest('assets/dist/css'))
+   .pipe(notify({ message: 'Styles task complete' }));
+ });
 
 
 
 /**
- * 3) Modernizr
+ * 3) Scripts
+ *
+ * First find all .js-files withing the /assets/js/ directory,
+ * concat all files, add the .min-suffix, uglify and then move to /assets/dist/js.
+ */
+
+ gulp.task('scripts', function() {
+   return gulp.src('assets/js/**/*.js')
+   .pipe(concat('main.js'))
+   .pipe(rename({ suffix: '.min' }))
+   .pipe(uglify())
+   .pipe(gulp.dest('assets/dist/js'))
+   .pipe(notify({ message: 'Scripts task complete' }));
+ });
+
+
+
+/**
+ * 4) Images
+ *
+ * First find all files withing the /assets/img/ directory,
+ * after that optimize the images and save them to /assets/dist/img.
+ */
+
+ gulp.task('images', function() {
+   return gulp.src('assets/img/**/*')
+   .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+   .pipe(gulp.dest('assets/dist/img'))
+   .pipe(notify({ message: 'Images task complete' }))
+ });
+
+
+
+/**
+ * 5) SVG
  *
  * [[ Explain what this Gulp task does ]].
  */
@@ -55,31 +100,37 @@
 
 
 /**
- * 4) Scripts
+ * 6) Clean
  *
  * [[ Explain what this Gulp task does ]].
  */
+
+ gulp.task('clean', function() {
+   return del(['assets/dist/css', 'assets/dist/js', 'assets/dist/img']);
+ });
 
 
 
 /**
- * 5) Images
+ * 7) Default
  *
  * [[ Explain what this Gulp task does ]].
  */
+
+ gulp.task('default', function() {
+   gulp.start('styles', 'scripts', 'images');
+ });
 
 
 
 /**
- * 6) SVG
+ * 8) Watch
  *
  * [[ Explain what this Gulp task does ]].
  */
 
-
-
-/**
- * 7) Watch
- *
- * [[ Explain what this Gulp task does ]].
- */
+ gulp.task('watch', function() {
+   gulp.watch('assets/scss/**/*.scss', ['styles']);
+   gulp.watch('assets/js/**/*.js', ['scripts']);
+   gulp.watch('assets/img/**/*', ['images']);
+ });

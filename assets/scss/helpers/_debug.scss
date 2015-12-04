@@ -1,0 +1,43 @@
+/**
+ * Helpers/debug stylesheet
+ *
+ * Table of contents
+ * 1) Mixin
+ * 2) Message
+ */
+
+
+
+/**
+ * 1) Mixin
+ */
+
+ @mixin debug-message {
+  position: fixed;
+  right: 1em;
+  bottom: 1em;
+  padding: .25em;
+  font-size: .75rem;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, .5);
+ }
+
+
+
+/**
+ * 2) Message
+ */
+
+ body.debug {
+  &:before {
+    @include debug-message;
+    content: "Breakpoint 0";
+  }
+
+  @include respond-min($bp1) { &:before { content: "Breakpoint 1"; } }
+  @include respond-min($bp2) { &:before { content: "Breakpoint 2"; } }
+  @include respond-min($bp3) { &:before { content: "Breakpoint 3"; } }
+  @include respond-min($bp4) { &:before { content: "Breakpoint 4"; } }
+  @include respond-min($bp5) { &:before { content: "Breakpoint 5"; } }
+ }

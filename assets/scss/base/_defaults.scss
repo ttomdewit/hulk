@@ -1,0 +1,48 @@
+/**
+ * Base/defaults stylesheet
+ *
+ * Table of contents
+ * 1) Box-sizing
+ * 2) HTML
+ * 3) Body
+ */
+
+
+
+/**
+ * 1) Box-sizing
+ */
+ *,
+ *:before,
+ *:after {
+  box-sizing: inherit;
+  webkit-font-smoothing: antialiased;
+ }
+
+
+
+/**
+ * 2) HTML
+ */
+
+ html {
+  font-family: $font-sans;
+  line-height: 1.5;
+  font-size: 1em;
+  box-sizing: border-box;
+
+  @include respond-min($bp3) {
+    font-size: 1.25em;
+  }
+ }
+
+
+
+/**
+ * 3) Body
+ */
+
+ body {
+  color: $color-text;
+  background-color: $color-bg;
+ }

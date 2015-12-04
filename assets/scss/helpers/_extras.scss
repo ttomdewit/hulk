@@ -1,0 +1,21 @@
+/**
+ * Helpers/extras stylesheet
+ *
+ * Table of contents
+ * 1) Clearfix
+ */
+
+
+
+/**
+ * 1) Clearfix
+ */
+
+.cf,
+%cf {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
