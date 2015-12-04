@@ -102,7 +102,7 @@
 /**
  * 6) Clean
  *
- * [[ Explain what this Gulp task does ]].
+ * Clean the dist folder prior to moving to production.
  */
 
  gulp.task('clean', function() {
@@ -114,7 +114,8 @@
 /**
  * 7) Default
  *
- * [[ Explain what this Gulp task does ]].
+ * When we type `$ gulp` in the command line,
+ * these default tasks will run.
  */
 
  gulp.task('default', function() {
@@ -126,7 +127,8 @@
 /**
  * 8) Watch
  *
- * [[ Explain what this Gulp task does ]].
+ * When we tye `$ gulp watch` in the command line,
+ * these files and folders will trigger Gulp tasks.
  */
 
  gulp.task('watch', function() {
