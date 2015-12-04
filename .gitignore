@@ -1,6 +1,9 @@
 # OS
 .DS_Store
 
+# Sass
+sass-cache
+
 # Bower
 components
 
