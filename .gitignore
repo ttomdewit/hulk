@@ -2,7 +2,7 @@
 .DS_Store
 
 # Sass
-sass-cache
+.sass-cache
 
 # Bower
 components
