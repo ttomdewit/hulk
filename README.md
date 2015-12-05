@@ -9,18 +9,22 @@ Modern, mobile-first frontend framework.
 
 ##Installation
 [Go up](#hulk)
+
 **To be created**
 
 ##Usage
 [Go up](#hulk)
+
 **To be created**
 
 ##Demo
 [Go up](#hulk)
+
 **To be created**
 
 ##Credits
 [Go up](#hulk)
+
 Developed and maintained by [**@ttomdewit**](https://twitter.com/ttomdewit).
 
 This framework is heavily inspired by:
