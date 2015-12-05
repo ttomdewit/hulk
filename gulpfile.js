@@ -140,7 +140,7 @@ gulp.task('clean', function() {
  * these default tasks will run.
  */
 
-gulp.task('default', function() {
+gulp.task('default', ['clean'], function() {
   gulp.start('clean', 'styles', 'styles-ie', 'scripts', 'scripts-head', 'images');
 });
 
@@ -157,4 +157,7 @@ gulp.task('watch', function() {
   gulp.watch('assets/scss/**/*.scss', ['styles', 'styles-ie']);
   gulp.watch('assets/js/**/*.js', ['scripts', 'scripts-head']);
   gulp.watch('assets/img/**/*', ['images']);
+
+  livereload.listen();
+  gulp.watch(['assets/dist/**/']).on('change', livereload.changed);
 });
