@@ -1,0 +1,36 @@
+/**
+ * Main stylesheet
+ *
+ * This main IE stylesheet takes care of all
+ * specific hacks for Internet Explorer.
+ *
+ * Table of contents
+ * 1) Overwrite variables
+ * 2) Custom
+ */
+
+
+
+/**
+ * 1) Overwrite variables
+ *
+ * Overwrite important variables so other
+ * stylesheets know they're dealing with IE.
+ */
+
+$old-ie: true;
+$mqs-up-to: 65em;
+
+@import "styles.scss";
+
+
+
+/**
+ * 1) Custom
+ *
+ * Where you write your IE specific code.
+ */
+
+.lt-ie9 .container {
+  width: 960px;
+}

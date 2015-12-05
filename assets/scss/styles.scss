@@ -22,8 +22,8 @@
  * configuration; such as variables, mixins and Bower components.
  */
 
- @charset "UTF-8";
- @import "config/__all";
+@charset "UTF-8";
+@import "config/__all";
 
 
 
@@ -34,7 +34,7 @@
  * configuration; such as default element styles.
  */
 
- @import "base/__all";
+@import "base/__all";
 
 
 
@@ -44,7 +44,7 @@
  * Import all .scss-files that take care of the layout configuration.
  */
 
- @import "layout/__all";
+@import "layout/__all";
 
 
 
@@ -55,7 +55,7 @@
  * configuration; such as non project-specific elements.
  */
 
- @import "modules/__all";
+@import "modules/__all";
 
 
 
@@ -66,7 +66,7 @@
  * configuration; such as project-specific elements and partials
  */
 
- @import "interface/__all";
+@import "interface/__all";
 
 
 
@@ -77,4 +77,4 @@
  * such as debug information, overrides and extras
  */
 
- @import "helpers/__all";
+@import "helpers/__all";

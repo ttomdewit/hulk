@@ -2,8 +2,6 @@
   "name": "Hulk",
   "version": "0.0.1",
   "dependencies": {
-    "jquery": "git://github.com/jquery/jquery.git",
-    "groot-sass": "git://github.com/lukewhitehouse/groot.git",
-    "normalize-scss": "git://github.com/appleboy/normalize.scss.git"
+    "jquery": "git://github.com/jquery/jquery.git"
   }
 }

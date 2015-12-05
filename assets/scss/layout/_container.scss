@@ -1,0 +1,17 @@
+/**
+ * Layout/container stylesheet
+ *
+ * Table of contents
+ * 1) Container
+ */
+
+.container {
+  margin: 0 auto;
+  width: 92.5%;
+  min-width: 15em;
+  max-width: 68.5em;
+
+  @include respond-min($bp1) {
+    width: 85%;
+  }
+}

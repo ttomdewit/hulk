@@ -12,7 +12,7 @@
  * 1) Normalize
  */
 
- @import "../../../components/normalize-scss/normalize.scss";
+@import "../../../node_modules/normalize.scss/normalize.scss";
 
 
 
@@ -20,11 +20,11 @@
  * 2) Groot
  */
 
- @import "../../../components/groot-sass/assets/app/scss/groot.scss";
+@import "../../../node_modules/groot-sass/assets/app/scss/groot.scss";
 
- @include groot(12);
- @include respond-min($bp1) { @include groot(12, "bp1"); }
- @include respond-min($bp2) { @include groot(12, "bp2"); }
- @include respond-min($bp3) { @include groot(12, "bp3"); }
- @include respond-min($bp4) { @include groot(12, "bp4"); }
- @include respond-min($bp5) { @include groot(12, "bp5"); }
+@include groot(12);
+@include respond-min($bp1) { @include groot(12, "bp1"); }
+@include respond-min($bp2) { @include groot(12, "bp2"); }
+@include respond-min($bp3) { @include groot(12, "bp3"); }
+@include respond-min($bp4) { @include groot(12, "bp4"); }
+@include respond-min($bp5) { @include groot(12, "bp5"); }

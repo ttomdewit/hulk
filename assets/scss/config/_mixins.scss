@@ -2,30 +2,71 @@
  * Mixins stylesheet
  *
  * Table of contents
- * 1) Respond (min)
- * 2) Respond (max)
+ * 1) Default variables
+ * 2) Respond (min)
+ * 3) Respond (max)
+ * 4) Old-ie
  */
 
 
 
 /**
- * 1) Respond (min)
+ * 1) Default variables;
  */
 
- @mixin respond-min($width) {
-  @media screen and (min-width: $width) {
-    @content;
-  }
- }
+$old-ie: false !default;
+$mqs-up-to: false !default;
 
 
 
 /**
- * 2) Respond (max)
+ * 2) Respond (min)
  */
 
- @mixin respond-max($width) {
-  @media screen and (max-width: $width) {
+@mixin respond-min($width) {
+  @if $old-ie != true {
+    @if $mqs-up-to {
+      @if $mqs-up-to >= $width {
+        @content;
+      }
+    }
+    @else {
+      @media screen and (min-width: $width) {
+        @content;
+      }
+    }
+  }
+}
+
+
+
+/**
+ * 3) Respond (max)
+ */
+
+@mixin respond-min($width) {
+  @if $old-ie != true {
+    @if $mqs-up-to {
+      @if $mqs-up-to <= $width {
+        @content;
+      }
+    }
+    @else {
+      @media screen and (max-width: $width) {
+        @content;
+      }
+    }
+  }
+}
+
+
+
+/**
+ * 3) Old-ie
+ */
+
+@mixin old-ie {
+  @if $old-ie {
     @content;
   }
- }
+}

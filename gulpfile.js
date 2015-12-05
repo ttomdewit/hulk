@@ -26,6 +26,7 @@
  var gulp           = require('gulp'),
      sass           = require('gulp-ruby-sass'),
      autoprefixer   = require('gulp-autoprefixer'),
+     pixrem         = require('gulp-pixrem'),
      minifycss      = require('gulp-minify-css'),
      jshint         = require('gulp-jshint'),
      uglify         = require('gulp-uglify'),
@@ -47,13 +48,25 @@
  * to /assets/dist/css/style.css.
  */
 
- gulp.task('styles', function() {
-   return sass('assets/scss/styles.scss', { style: 'expanded' })
-   .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
-   .pipe(minifycss())
-   .pipe(gulp.dest('assets/dist/css'))
-   .pipe(notify({ title: 'Styles', message: 'Task completed' }))
- });
+gulp.task('styles', function() {
+  return sass('assets/scss/styles.scss', { style: 'expanded' })
+  .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
+  .pipe(pixrem({ rootValue: '1em' }))
+  .pipe(minifycss())
+  .pipe(gulp.dest('assets/dist/css'))
+  .pipe(notify({ title: 'Styles', message: 'Task completed' }))
+});
+
+gulp.task('styles-ie', function() {
+  return sass('assets/scss/ie.scss', { style: 'expanded' })
+  .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
+  .pipe(pixrem({ rootValue: '1em' }))
+  .pipe(minifycss())
+  .pipe(gulp.dest('assets/dist/css'))
+  .pipe(notify({ title: 'Styles', message: 'Task completed' }))
+});
+
+
 
 
 
@@ -64,23 +77,23 @@
  * concat all files, add the .min-suffix, uglify and then move to /assets/dist/js.
  */
 
- gulp.task('scripts-head', function() {
-   return gulp.src(['assets/js/head.js', 'assets/js/vendor/modernizr.js'])
-   .pipe(concat('head.js'))
-   .pipe(rename({ suffix: '.min' }))
-   .pipe(uglify())
-   .pipe(gulp.dest('assets/dist/js'))
-   .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
- });
+gulp.task('scripts-head', function() {
+  return gulp.src(['assets/js/head.js', 'assets/js/vendor/modernizr.js'])
+  .pipe(concat('head.js'))
+  .pipe(rename({ suffix: '.min' }))
+  .pipe(uglify())
+  .pipe(gulp.dest('assets/dist/js'))
+  .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
+});
 
- gulp.task('scripts', function() {
-   return gulp.src(['assets/js/**/*.js', 'components/jquery/dist/jquery.js', '!assets/js/head.js', '!assets/js/vendor/modernizr.js'])
-   .pipe(concat('main.js'))
-   .pipe(rename({ suffix: '.min' }))
-   .pipe(uglify())
-   .pipe(gulp.dest('assets/dist/js'))
-   .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
- });
+gulp.task('scripts', function() {
+  return gulp.src(['components/jquery/dist/jquery.js', 'assets/js/**/*.js', '!assets/js/head.js', '!assets/js/vendor/modernizr.js'])
+  .pipe(concat('main.js'))
+  .pipe(rename({ suffix: '.min' }))
+  .pipe(uglify())
+  .pipe(gulp.dest('assets/dist/js'))
+  .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
+});
 
 
 
@@ -91,12 +104,12 @@
  * after that optimize the images and save them to /assets/dist/img.
  */
 
- gulp.task('images', function() {
-   return gulp.src('assets/img/**/*')
-   .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-   .pipe(gulp.dest('assets/dist/img'))
-   .pipe(notify({ title: 'Images', message: 'Task completed' }))
- });
+gulp.task('images', function() {
+  return gulp.src('assets/img/**/*')
+  .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+  .pipe(gulp.dest('assets/dist/img'))
+  .pipe(notify({ title: 'Images', message: 'Task completed' }))
+});
 
 
 
@@ -114,9 +127,9 @@
  * Clean the dist folder prior to moving to production.
  */
 
- gulp.task('clean', function() {
-   return del(['assets/dist/css', 'assets/dist/js', 'assets/dist/img']);
- });
+gulp.task('clean', function() {
+  return del(['assets/dist/css', 'assets/dist/js', 'assets/dist/img']);
+});
 
 
 
@@ -127,9 +140,9 @@
  * these default tasks will run.
  */
 
- gulp.task('default', function() {
-   gulp.start('clean', 'styles', 'scripts', 'scripts-head', 'images');
- });
+gulp.task('default', function() {
+  gulp.start('clean', 'styles', 'styles-ie', 'scripts', 'scripts-head', 'images');
+});
 
 
 
@@ -140,8 +153,8 @@
  * these files and folders will trigger Gulp tasks.
  */
 
- gulp.task('watch', function() {
-   gulp.watch('assets/scss/**/*.scss', ['styles']);
-   gulp.watch('assets/js/**/*.js', ['scripts', 'scripts-head']);
-   gulp.watch('assets/img/**/*', ['images']);
- });
+gulp.task('watch', function() {
+  gulp.watch('assets/scss/**/*.scss', ['styles', 'styles-ie']);
+  gulp.watch('assets/js/**/*.js', ['scripts', 'scripts-head']);
+  gulp.watch('assets/img/**/*', ['images']);
+});
