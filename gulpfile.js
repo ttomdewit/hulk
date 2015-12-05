@@ -23,26 +23,26 @@
  * Require all modules and define variables.
  */
 
- var gulp = require('gulp'),
-     sass = require('gulp-ruby-sass'),
-     autoprefixer = require('gulp-autoprefixer'),
-     minifycss = require('gulp-minify-css'),
-     jshint = require('gulp-jshint'),
-     uglify = require('gulp-uglify'),
-     imagemin = require('gulp-imagemin'),
-     rename = require('gulp-rename'),
-     concat = require('gulp-concat'),
-     notify = require('gulp-notify'),
-     cache = require('gulp-cache'),
-     livereload = require('gulp-livereload'),
-     del = require('del');
+ var gulp           = require('gulp'),
+     sass           = require('gulp-ruby-sass'),
+     autoprefixer   = require('gulp-autoprefixer'),
+     minifycss      = require('gulp-minify-css'),
+     jshint         = require('gulp-jshint'),
+     uglify         = require('gulp-uglify'),
+     imagemin       = require('gulp-imagemin'),
+     rename         = require('gulp-rename'),
+     concat         = require('gulp-concat'),
+     notify         = require('gulp-notify'),
+     cache          = require('gulp-cache'),
+     livereload     = require('gulp-livereload'),
+     del            = require('del');
 
 
 
 /**
  * 2) Styles
  *
- * First find all .scss-files withing the /assets/scss/ directory,
+ * First find all .scss-files within the /assets/scss/ directory,
  * after that autoprefix what's necessary, then minify, finally move
  * to /assets/dist/css/style.css.
  */
@@ -64,8 +64,17 @@
  * concat all files, add the .min-suffix, uglify and then move to /assets/dist/js.
  */
 
+ gulp.task('scripts-head', function() {
+   return gulp.src(['assets/js/head.js', 'assets/js/vendor/modernizr.js'])
+   .pipe(concat('head.js'))
+   .pipe(rename({ suffix: '.min' }))
+   .pipe(uglify())
+   .pipe(gulp.dest('assets/dist/js'))
+   .pipe(notify({ message: 'Scripts task complete' }));
+ });
+
  gulp.task('scripts', function() {
-   return gulp.src('assets/js/**/*.js')
+   return gulp.src(['assets/js/**/*.js', 'components/jquery/dist/jquery.js', '!assets/js/head.js', '!assets/js/vendor/modernizr.js'])
    .pipe(concat('main.js'))
    .pipe(rename({ suffix: '.min' }))
    .pipe(uglify())
@@ -119,7 +128,7 @@
  */
 
  gulp.task('default', function() {
-   gulp.start('styles', 'scripts', 'images');
+   gulp.start('clean', 'styles', 'scripts', 'scripts-head', 'images');
  });
 
 
@@ -133,6 +142,6 @@
 
  gulp.task('watch', function() {
    gulp.watch('assets/scss/**/*.scss', ['styles']);
-   gulp.watch('assets/js/**/*.js', ['scripts']);
+   gulp.watch('assets/js/**/*.js', ['scripts', 'scripts-head']);
    gulp.watch('assets/img/**/*', ['images']);
  });
