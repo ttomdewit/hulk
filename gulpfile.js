@@ -52,7 +52,7 @@
    .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
    .pipe(minifycss())
    .pipe(gulp.dest('assets/dist/css'))
-   .pipe(notify({ message: 'Styles task complete' }));
+   .pipe(notify({ title: 'Styles', message: 'Task completed' }))
  });
 
 
@@ -70,7 +70,7 @@
    .pipe(rename({ suffix: '.min' }))
    .pipe(uglify())
    .pipe(gulp.dest('assets/dist/js'))
-   .pipe(notify({ message: 'Scripts task complete' }));
+   .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
  });
 
  gulp.task('scripts', function() {
@@ -79,7 +79,7 @@
    .pipe(rename({ suffix: '.min' }))
    .pipe(uglify())
    .pipe(gulp.dest('assets/dist/js'))
-   .pipe(notify({ message: 'Scripts task complete' }));
+   .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
  });
 
 
@@ -95,7 +95,7 @@
    return gulp.src('assets/img/**/*')
    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
    .pipe(gulp.dest('assets/dist/img'))
-   .pipe(notify({ message: 'Images task complete' }))
+   .pipe(notify({ title: 'Images', message: 'Task completed' }))
  });
 
 
