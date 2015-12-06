@@ -2,6 +2,7 @@
   "name": "Hulk",
   "version": "0.0.1",
   "devDependencies": {
+    "browser-sync": "^2.10.0",
     "del": "^2.1.0",
     "groot-sass": "0.0.4",
     "gulp": "^3.9.0",

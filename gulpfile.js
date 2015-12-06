@@ -24,6 +24,7 @@
  */
 
  var gulp           = require('gulp'),
+     browserSync    = require('browser-sync').create(),
      sass           = require('gulp-ruby-sass'),
      autoprefixer   = require('gulp-autoprefixer'),
      pixrem         = require('gulp-pixrem'),
@@ -35,7 +36,6 @@
      concat         = require('gulp-concat'),
      notify         = require('gulp-notify'),
      cache          = require('gulp-cache'),
-     livereload     = require('gulp-livereload'),
      del            = require('del');
 
 
@@ -54,6 +54,7 @@ gulp.task('styles', function() {
   .pipe(pixrem({ rootValue: '1em' }))
   .pipe(minifycss())
   .pipe(gulp.dest('assets/dist/css'))
+  .pipe(browserSync.stream())
   .pipe(notify({ title: 'Styles', message: 'Task completed' }))
 });
 
@@ -63,6 +64,7 @@ gulp.task('styles-ie', function() {
   .pipe(pixrem({ rootValue: '1em' }))
   .pipe(minifycss())
   .pipe(gulp.dest('assets/dist/css'))
+  .pipe(browserSync.stream())
   .pipe(notify({ title: 'Styles', message: 'Task completed' }))
 });
 
@@ -83,6 +85,7 @@ gulp.task('scripts-head', function() {
   .pipe(rename({ suffix: '.min' }))
   .pipe(uglify())
   .pipe(gulp.dest('assets/dist/js'))
+  .pipe(browserSync.stream())
   .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
 });
 
@@ -92,6 +95,7 @@ gulp.task('scripts', function() {
   .pipe(rename({ suffix: '.min' }))
   .pipe(uglify())
   .pipe(gulp.dest('assets/dist/js'))
+  .pipe(browserSync.stream())
   .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
 });
 
@@ -108,6 +112,7 @@ gulp.task('images', function() {
   return gulp.src('assets/img/**/*')
   .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
   .pipe(gulp.dest('assets/dist/img'))
+  .pipe(browserSync.stream())
   .pipe(notify({ title: 'Images', message: 'Task completed' }))
 });
 
@@ -154,10 +159,11 @@ gulp.task('default', ['clean'], function() {
  */
 
 gulp.task('watch', function() {
+  browserSync.init({ server: './' });
+
   gulp.watch('assets/scss/**/*.scss', ['styles', 'styles-ie']);
   gulp.watch('assets/js/**/*.js', ['scripts', 'scripts-head']);
   gulp.watch('assets/img/**/*', ['images']);
 
-  livereload.listen();
-  gulp.watch(['assets/dist/**/']).on('change', livereload.changed);
+  gulp.watch(['*.html']).on('change', browserSync.reload);
 });
