@@ -1,5 +1,5 @@
 /*! modernizr 3.2.0 (Custom Build) | MIT *
- * http://modernizr.com/download/?-prefixes-setclasses-shiv-teststyles !*/
+ * http://modernizr.com/download/?-svg-prefixes-setclasses-shiv-teststyles !*/
 ! function(e, t, n) {
   function a(e, t) {
     return typeof e === t
@@ -7,9 +7,9 @@
 
   function r() {
     var e, t, n, r, o, i, s;
-    for (var l in f)
-      if (f.hasOwnProperty(l)) {
-        if (e = [], t = f[l], t.name && (e.push(t.name.toLowerCase()), t.options && t.options.aliases && t.options.aliases.length))
+    for (var l in d)
+      if (d.hasOwnProperty(l)) {
+        if (e = [], t = d[l], t.name && (e.push(t.name.toLowerCase()), t.options && t.options.aliases && t.options.aliases.length))
           for (n = 0; n < t.options.aliases.length; n++) e.push(t.options.aliases[n].toLowerCase());
         for (r = a(t.fn, "function") ? t.fn() : t.fn, o = 0; o < e.length; o++) i = e[o], s = i.split("."), 1 === s.length ? Modernizr[s[0]] = r : (!Modernizr[s[0]] || Modernizr[s[0]] instanceof Boolean || (Modernizr[s[0]] = new Boolean(Modernizr[s[0]])), Modernizr[s[0]][s[1]] = r), c.push((r ? "" : "no-") + s.join("-"))
       }
@@ -35,16 +35,16 @@
   }
 
   function l(e, n, a, r) {
-    var o, l, c, f, d = "modernizr",
+    var o, l, c, d, f = "modernizr",
       u = i("div"),
       p = s();
     if (parseInt(a, 10))
-      for (; a--;) c = i("div"), c.id = r ? r[a] : d + (a + 1), u.appendChild(c);
-    return o = i("style"), o.type = "text/css", o.id = "s" + d, (p.fake ? p : u).appendChild(o), p.appendChild(u), o.styleSheet ? o.styleSheet.cssText = e : o.appendChild(t.createTextNode(e)), u.id = d, p.fake && (p.style.background = "", p.style.overflow = "hidden", f = m.style.overflow, m.style.overflow = "hidden", m.appendChild(p)), l = n(u, e), p.fake ? (p.parentNode.removeChild(p), m.style.overflow = f, m.offsetHeight) : u.parentNode.removeChild(u), !!l
+      for (; a--;) c = i("div"), c.id = r ? r[a] : f + (a + 1), u.appendChild(c);
+    return o = i("style"), o.type = "text/css", o.id = "s" + f, (p.fake ? p : u).appendChild(o), p.appendChild(u), o.styleSheet ? o.styleSheet.cssText = e : o.appendChild(t.createTextNode(e)), u.id = f, p.fake && (p.style.background = "", p.style.overflow = "hidden", d = m.style.overflow, m.style.overflow = "hidden", m.appendChild(p)), l = n(u, e), p.fake ? (p.parentNode.removeChild(p), m.style.overflow = d, m.offsetHeight) : u.parentNode.removeChild(u), !!l
   }
   var c = [],
-    f = [],
-    d = {
+    d = [],
+    f = {
       _version: "3.2.0",
       _config: {
         classPrefix: "",
@@ -60,23 +60,23 @@
         }, 0)
       },
       addTest: function(e, t, n) {
-        f.push({
+        d.push({
           name: e,
           fn: t,
           options: n
         })
       },
       addAsyncTest: function(e) {
-        f.push({
+        d.push({
           name: null,
           fn: e
         })
       }
     },
     Modernizr = function() {};
-  Modernizr.prototype = d, Modernizr = new Modernizr;
-  var u = d._config.usePrefixes ? " -webkit- -moz- -o- -ms- ".split(" ") : [];
-  d._prefixes = u;
+  Modernizr.prototype = f, Modernizr = new Modernizr, Modernizr.addTest("svg", !!t.createElementNS && !!t.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect);
+  var u = f._config.usePrefixes ? " -webkit- -moz- -o- -ms- ".split(" ") : [];
+  f._prefixes = u;
   var m = t.documentElement,
     p = "svg" === m.nodeName.toLowerCase();
   p || ! function(e, t) {
@@ -102,14 +102,14 @@
     }
 
     function i(e, n, a) {
-      if (n || (n = t), d) return n.createElement(e);
+      if (n || (n = t), f) return n.createElement(e);
       a || (a = o(n));
       var r;
       return r = a.cache[e] ? a.cache[e].cloneNode() : h.test(e) ? (a.cache[e] = a.createElem(e)).cloneNode() : a.createElem(e), !r.canHaveChildren || p.test(e) || r.tagUrn ? r : a.frag.appendChild(r)
     }
 
     function s(e, n) {
-      if (e || (e = t), d) return e.createDocumentFragment();
+      if (e || (e = t), f) return e.createDocumentFragment();
       n = n || o(e);
       for (var r = n.frag.cloneNode(), i = 0, s = a(), l = s.length; l > i; i++) r.createElement(s[i]);
       return r
@@ -126,9 +126,9 @@
     function c(e) {
       e || (e = t);
       var a = o(e);
-      return !E.shivCSS || f || a.hasCSS || (a.hasCSS = !!n(e, "article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}template{display:none}")), d || l(e, a), e
+      return !E.shivCSS || d || a.hasCSS || (a.hasCSS = !!n(e, "article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}template{display:none}")), f || l(e, a), e
     }
-    var f, d, u = "3.7.3",
+    var d, f, u = "3.7.3",
       m = e.html5 || {},
       p = /^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i,
       h = /^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i,
@@ -138,20 +138,20 @@
     ! function() {
       try {
         var e = t.createElement("a");
-        e.innerHTML = "<xyz></xyz>", f = "hidden" in e, d = 1 == e.childNodes.length || function() {
+        e.innerHTML = "<xyz></xyz>", d = "hidden" in e, f = 1 == e.childNodes.length || function() {
           t.createElement("a");
           var e = t.createDocumentFragment();
           return "undefined" == typeof e.cloneNode || "undefined" == typeof e.createDocumentFragment || "undefined" == typeof e.createElement
         }()
       } catch (n) {
-        f = !0, d = !0
+        d = !0, f = !0
       }
     }();
     var E = {
       elements: m.elements || "abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output picture progress section summary template time video",
       version: u,
       shivCSS: m.shivCSS !== !1,
-      supportsUnknownElements: d,
+      supportsUnknownElements: f,
       shivMethods: m.shivMethods !== !1,
       type: "default",
       shivDocument: c,
@@ -161,8 +161,8 @@
     };
     e.html5 = E, c(t), "object" == typeof module && module.exports && (module.exports = E)
   }("undefined" != typeof e ? e : this, t);
-  d.testStyles = l;
-  r(), o(c), delete d.addTest, delete d.addAsyncTest;
+  f.testStyles = l;
+  r(), o(c), delete f.addTest, delete f.addAsyncTest;
   for (var h = 0; h < Modernizr._q.length; h++) Modernizr._q[h]();
   e.Modernizr = Modernizr
 }(window, document);

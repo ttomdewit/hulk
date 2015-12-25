@@ -11,6 +11,7 @@
  * 4) Modules
  * 5) Interface
  * 6) Helpers
+ * 7) Icons
  */
 
 
@@ -78,3 +79,13 @@
  */
 
 @import "helpers/__all";
+
+
+
+/**
+ * 7) Icons
+ *
+ * Import all .scss-files that take care of the icons
+ */
+
+@import "icons/__all";

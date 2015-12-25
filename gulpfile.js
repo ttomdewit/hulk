@@ -127,12 +127,7 @@ gulp.task('images', function() {
  */
 
 gulp.task('svg', function() {
-  svg({
-    src: 'assets/img/**/*.svg',
-    scssOutput: 'assets/scss/icons',
-    pngOutput: 'assets/dist/img/',
-    cssOutput: false
-  });
+  svg({ src: 'assets/img/**/*.svg', scssOutput: 'assets/scss/icons', pngOutput: 'assets/dist/img/', cssOutput: false })
 });
 
 
