@@ -32,6 +32,7 @@
      jshint         = require('gulp-jshint'),
      uglify         = require('gulp-uglify'),
      imagemin       = require('gulp-imagemin'),
+     svg            = require('gulp-iconify'),
      rename         = require('gulp-rename'),
      concat         = require('gulp-concat'),
      notify         = require('gulp-notify'),
@@ -104,7 +105,7 @@ gulp.task('scripts', function() {
 /**
  * 4) Images
  *
- * First find all files withing the /assets/img/ directory,
+ * First find all files within the /assets/img/ directory,
  * after that optimize the images and save them to /assets/dist/img.
  */
 
@@ -121,8 +122,18 @@ gulp.task('images', function() {
 /**
  * 5) SVG
  *
- * [[ Explain what this Gulp task does ]].
+ * First find all SVG files within the /assets/img/ directory,
+ * after that optimize SVGs, make fallback PNGs and save them to /assets/img/icons
  */
+
+gulp.task('svg', function() {
+  svg({
+    src: 'assets/img/**/*.svg',
+    scssOutput: 'assets/scss/icons',
+    pngOutput: 'assets/dist/img/',
+    cssOutput: false
+  });
+});
 
 
 
@@ -146,7 +157,7 @@ gulp.task('clean', function() {
  */
 
 gulp.task('default', ['clean'], function() {
-  gulp.start('clean', 'styles', 'styles-ie', 'scripts', 'scripts-head', 'images');
+  gulp.start('clean', 'styles', 'styles-ie', 'scripts', 'scripts-head', 'images', 'svg');
 });
 
 
@@ -164,6 +175,7 @@ gulp.task('watch', function() {
   gulp.watch('assets/scss/**/*.scss', ['styles', 'styles-ie']);
   gulp.watch('assets/js/**/*.js', ['scripts', 'scripts-head']);
   gulp.watch('assets/img/**/*', ['images']);
+  gulp.watch('assets/img/**/*.svg', ['svg']);
 
   gulp.watch(['*.html']).on('change', browserSync.reload);
 });
