@@ -44,7 +44,7 @@ $mqs-up-to: false !default;
  * 3) Respond (max)
  */
 
-@mixin respond-min($width) {
+@mixin respond-max($width) {
   @if $old-ie != true {
     @if $mqs-up-to {
       @if $mqs-up-to <= $width {
