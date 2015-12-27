@@ -127,7 +127,12 @@ gulp.task('images', function() {
  */
 
 gulp.task('svg', function() {
-  svg({ src: 'assets/img/**/*.svg', scssOutput: 'assets/scss/icons', pngOutput: 'assets/dist/img/', cssOutput: false })
+  svg({
+    src: 'assets/img/**/*.svg',
+    scssOutput: 'assets/scss/icons',
+    pngOutput: 'assets/dist/img/',
+    cssOutput: false
+  })
 });
 
 
@@ -139,7 +144,7 @@ gulp.task('svg', function() {
  */
 
 gulp.task('clean', function() {
-  return del(['assets/dist/css', 'assets/dist/js', 'assets/dist/img']);
+  return del(['assets/dist/css', 'assets/dist/js', 'assets/dist/img', 'assets/scss/icons/icon.fallback.scss', 'assets/scss/icons/icon.png.scss', 'assets/scss/icons/icon.svg.scss',]);
 });
 
 
