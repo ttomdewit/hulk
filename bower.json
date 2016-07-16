@@ -1,7 +1,0 @@
-{
-  "name": "Hulk",
-  "version": "0.0.1",
-  "dependencies": {
-    "jquery": "git://github.com/jquery/jquery.git"
-  }
-}
