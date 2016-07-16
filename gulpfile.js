@@ -29,7 +29,7 @@
      sass           = require('gulp-ruby-sass'),
      autoprefixer   = require('gulp-autoprefixer'),
      pixrem         = require('gulp-pixrem'),
-     minifycss      = require('gulp-minify-css'),
+     minifycss      = require('gulp-cssnano'),
      jshint         = require('gulp-jshint'),
      uglify         = require('gulp-uglify'),
      imagemin       = require('gulp-imagemin'),
@@ -163,7 +163,7 @@ gulp.task('clean', function() {
 /**
  * 7) Clear
  *
- * Clean the dist folder prior to moving to production.
+ * Clear the cache.
  */
 
 gulp.task('clear', function (done) {
