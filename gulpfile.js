@@ -157,6 +157,7 @@ gulp.task('svg', ['svg2png'], function() {
  * this command will extract the critical css and inlines HTML and CSS.
  *
  * WARNING: you should have a play with it's output and change the `dest` while you're at it.
+ * You can also chose to ignore multiple selectors from your css.
  */
 
 gulp.task('critical', function() {
