@@ -91,7 +91,7 @@ gulp.task('scripts-head', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src(['components/jquery/dist/jquery.js', 'assets/js/**/*.js', '!assets/js/head.js', '!assets/js/vendor/modernizr.js'])
+  return gulp.src(['components/jquery/dist/jquery.js', 'assets/js/vendor/*.js', 'assets/js/**/*.js', '!assets/js/head.js', '!assets/js/vendor/modernizr.js'])
   .pipe(concat('main.js'))
   .pipe(rename({ suffix: '.min' }))
   .pipe(uglify())
