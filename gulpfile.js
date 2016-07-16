@@ -10,10 +10,11 @@
  * 3) Scripts
  * 4) Images
  * 5) SVG
- * 6) Clean
- * 7) Clear
- * 8) Default
- * 9) Watch
+ * 6) Critical CSS
+ * 7) Clean
+ * 8) Clear
+ * 9) Default
+ * 10) Watch
  */
 
 
@@ -39,7 +40,8 @@
      concat         = require('gulp-concat'),
      notify         = require('gulp-notify'),
      cache          = require('gulp-cache'),
-     del            = require('del');
+     del            = require('del'),
+     critical       = require('critical');
 
 
 
@@ -149,7 +151,32 @@ gulp.task('svg', ['svg2png'], function() {
 
 
 /**
- * 6) Clean
+ * 6) Critical CSS
+ *
+ * When we type `$ gulp critical` in the command line,
+ * this command will extract the critical css and inlines HTML and CSS.
+ *
+ * WARNING: you should have a play with it's output and change the `dest` while you're at it.
+ */
+
+gulp.task('critical', function() {
+  critical.generate({
+    inline: true,
+    base: './',
+    src: 'index.html',
+    css: ['assets/dist/css/styles.css'],
+    dest: 'index.html',
+    minify: true,
+    width: 1300,
+    height: 900,
+    ignore: ['body.debug:before']
+  });
+});
+
+
+
+/**
+ * 7) Clean
  *
  * Clean the dist folder prior to moving to production.
  */
@@ -161,7 +188,7 @@ gulp.task('clean', function() {
 
 
 /**
- * 7) Clear
+ * 8) Clear
  *
  * Clear the cache.
  */
@@ -173,7 +200,7 @@ gulp.task('clear', function (done) {
 
 
 /**
- * 8) Default
+ * 9) Default
  *
  * When we type `$ gulp` in the command line,
  * these default tasks will run.
@@ -186,7 +213,7 @@ gulp.task('default', ['clean'], function() {
 
 
 /**
- * 9) Watch
+ * 10) Watch
  *
  * When we tye `$ gulp watch` in the command line,
  * these files and folders will trigger Gulp tasks.
