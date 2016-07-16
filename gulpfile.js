@@ -65,13 +65,14 @@ gulp.task('styles', function() {
 });
 
 gulp.task('styles-ie', function() {
-  // return sass('assets/scss/ie.scss', { style: 'expanded' })
-  // .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
-  // .pipe(pixrem({ rootValue: '1em' }))
-  // .pipe(minifycss())
-  // .pipe(gulp.dest('assets/dist/css'))
-  // .pipe(browserSync.stream())
-  // .pipe(notify({ title: 'Styles', message: 'Task completed' }))
+  return gulp.src('assets/scss/ie.scss')
+  .pipe(sass())
+  .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
+  .pipe(pixrem({ rootValue: '1em' }))
+  .pipe(minifycss())
+  .pipe(gulp.dest('assets/dist/css'))
+  .pipe(browserSync.stream())
+  .pipe(notify({ title: 'Styles', message: 'Task completed' }))
 });
 
 
