@@ -27,7 +27,7 @@
 
  var gulp           = require('gulp'),
      browserSync    = require('browser-sync').create(),
-     sass           = require('gulp-ruby-sass'),
+     sass           = require('gulp-sass'),
      autoprefixer   = require('gulp-autoprefixer'),
      pixrem         = require('gulp-pixrem'),
      minifycss      = require('gulp-cssnano'),
@@ -54,7 +54,8 @@
  */
 
 gulp.task('styles', function() {
-  return sass('assets/scss/styles.scss', { style: 'expanded' })
+  return gulp.src('assets/scss/styles.scss')
+  .pipe(sass())
   .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
   .pipe(pixrem({ rootValue: '1em' }))
   .pipe(minifycss())
@@ -64,13 +65,13 @@ gulp.task('styles', function() {
 });
 
 gulp.task('styles-ie', function() {
-  return sass('assets/scss/ie.scss', { style: 'expanded' })
-  .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
-  .pipe(pixrem({ rootValue: '1em' }))
-  .pipe(minifycss())
-  .pipe(gulp.dest('assets/dist/css'))
-  .pipe(browserSync.stream())
-  .pipe(notify({ title: 'Styles', message: 'Task completed' }))
+  // return sass('assets/scss/ie.scss', { style: 'expanded' })
+  // .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
+  // .pipe(pixrem({ rootValue: '1em' }))
+  // .pipe(minifycss())
+  // .pipe(gulp.dest('assets/dist/css'))
+  // .pipe(browserSync.stream())
+  // .pipe(notify({ title: 'Styles', message: 'Task completed' }))
 });
 
 
