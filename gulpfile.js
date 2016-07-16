@@ -11,8 +11,9 @@
  * 4) Images
  * 5) SVG
  * 6) Clean
- * 7) Default
- * 8) Watch
+ * 7) Clear
+ * 8) Default
+ * 9) Watch
  */
 
 
@@ -32,7 +33,8 @@
      jshint         = require('gulp-jshint'),
      uglify         = require('gulp-uglify'),
      imagemin       = require('gulp-imagemin'),
-     svg            = require('gulp-iconify'),
+     svg2png        = require('gulp-svg2png'),
+     svgSymbols     = require('gulp-svg-symbols'),
      rename         = require('gulp-rename'),
      concat         = require('gulp-concat'),
      notify         = require('gulp-notify'),
@@ -126,13 +128,22 @@ gulp.task('images', function() {
  * after that optimize SVGs, make fallback PNGs and save them to /assets/img/icons
  */
 
-gulp.task('svg', function() {
-  svg({
-    src: 'assets/img/**/*.svg',
-    scssOutput: 'assets/scss/icons',
-    pngOutput: 'assets/dist/img/',
-    cssOutput: false
-  })
+gulp.task('svg2png', function() {
+  return gulp.src('assets/img/**/*.svg')
+  .pipe(svg2png())
+  .pipe(gulp.dest('assets/dist/img/icons/png'))
+  .pipe(notify({ title: 'SVG 2 PNG', message: 'Task completed' }))
+});
+
+gulp.task('svg', ['svg2png'], function() {
+  return gulp.src('assets/img/**/*.svg')
+  .pipe(
+    svgSymbols({
+      className: '.icon--%f'
+    })
+  )
+  .pipe(gulp.dest('assets/dist/img/icons'))
+  .pipe(notify({ title: 'SVG', message: 'Task completed' }))
 });
 
 
@@ -144,13 +155,25 @@ gulp.task('svg', function() {
  */
 
 gulp.task('clean', function() {
-  return del(['assets/dist/css', 'assets/dist/js', 'assets/dist/img', 'assets/scss/icons/icon.fallback.scss', 'assets/scss/icons/icon.png.scss', 'assets/scss/icons/icon.svg.scss',]);
+  return del(['assets/dist/css', 'assets/dist/js', 'assets/dist/img']);
 });
 
 
 
 /**
- * 7) Default
+ * 7) Clear
+ *
+ * Clean the dist folder prior to moving to production.
+ */
+
+gulp.task('clear', function (done) {
+  return cache.clearAll(done);
+});
+
+
+
+/**
+ * 8) Default
  *
  * When we type `$ gulp` in the command line,
  * these default tasks will run.
@@ -163,7 +186,7 @@ gulp.task('default', ['clean'], function() {
 
 
 /**
- * 8) Watch
+ * 9) Watch
  *
  * When we tye `$ gulp watch` in the command line,
  * these files and folders will trigger Gulp tasks.
