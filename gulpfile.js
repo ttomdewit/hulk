@@ -31,7 +31,6 @@
      autoprefixer   = require('gulp-autoprefixer'),
      pixrem         = require('gulp-pixrem'),
      minifycss      = require('gulp-cssnano'),
-     jshint         = require('gulp-jshint'),
      uglify         = require('gulp-uglify'),
      imagemin       = require('gulp-imagemin'),
      svg2png        = require('gulp-svg2png'),
