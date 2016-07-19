@@ -11,10 +11,11 @@
  * 4) Images
  * 5) SVG
  * 6) Critical CSS
- * 7) Clean
- * 8) Clear
- * 9) Default
- * 10) Watch
+ * 7) Purify CSS
+ * 8) Clean
+ * 9) Clear
+ * 10) Default
+ * 11) Watch
  */
 
 
@@ -40,7 +41,8 @@
      notify         = require('gulp-notify'),
      cache          = require('gulp-cache'),
      del            = require('del'),
-     critical       = require('critical');
+     critical       = require('critical'),
+     purify         = require('gulp-purifycss');
 
 
 
@@ -178,7 +180,21 @@ gulp.task('critical', function() {
 
 
 /**
- * 7) Clean
+ * 7) Purify CSS
+ *
+ * When we tye `$ gulp purify` in the command line,
+ * this command will report what CSS is not being used in your terminal.
+ */
+
+gulp.task('purify', function() {
+  return gulp.src('assets/dist/css/styles.css')
+  .pipe(purify(['index.html'], { output: false, info: true, rejected: true }));
+});
+
+
+
+/**
+ * 8) Clean
  *
  * Clean the dist folder prior to moving to production.
  */
@@ -190,7 +206,7 @@ gulp.task('clean', function() {
 
 
 /**
- * 8) Clear
+ * 9) Clear
  *
  * Clear the cache.
  */
@@ -202,7 +218,7 @@ gulp.task('clear', function (done) {
 
 
 /**
- * 9) Default
+ * 10) Default
  *
  * When we type `$ gulp` in the command line,
  * these default tasks will run.
@@ -215,7 +231,7 @@ gulp.task('default', ['clean'], function() {
 
 
 /**
- * 10) Watch
+ * 11) Watch
  *
  * When we tye `$ gulp watch` in the command line,
  * these files and folders will trigger Gulp tasks.
