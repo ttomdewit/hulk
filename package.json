@@ -1,6 +1,18 @@
 {
   "name": "Hulk",
   "version": "0.0.1",
+  "author": "Tom de Wit <ttomdewit@gmail.com>",
+  "contributors": {
+    "name": "Tom de Wit",
+    "email": "ttomdewit@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ttomdewit/hulk"
+  }
+  "bugs": {
+    "url": "https://github.com/ttomdewit/hulk/issues"
+  }
   "devDependencies": {
     "browser-sync": "^2.10.0",
     "critical": "^0.7.3",
