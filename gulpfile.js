@@ -57,8 +57,7 @@
 gulp.task('styles', function() {
   return gulp.src('assets/scss/styles.scss')
   .pipe(sass())
-  .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
-  .pipe(pixrem({ rootValue: '1em' }))
+  .pipe(autoprefixer('last 2 versions', 'Firefox ESR', 'Opera 12.1'))
   .pipe(minifycss())
   .pipe(gulp.dest('assets/dist/css'))
   .pipe(browserSync.stream())
@@ -68,7 +67,7 @@ gulp.task('styles', function() {
 gulp.task('styles-ie', function() {
   return gulp.src('assets/scss/ie.scss')
   .pipe(sass())
-  .pipe(autoprefixer('last 2 versions', 'ie 8', 'ie 9', 'Firefox ESR', 'Opera 12.1'))
+  .pipe(autoprefixer('ie 8', 'ie 9'))
   .pipe(pixrem({ rootValue: '1em' }))
   .pipe(minifycss())
   .pipe(gulp.dest('assets/dist/css'))
