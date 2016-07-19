@@ -26,23 +26,11 @@
  * Require all modules and define variables.
  */
 
- var gulp           = require('gulp'),
-     browserSync    = require('browser-sync').create(),
-     sass           = require('gulp-sass'),
-     autoprefixer   = require('gulp-autoprefixer'),
-     pixrem         = require('gulp-pixrem'),
-     minifycss      = require('gulp-cssnano'),
-     uglify         = require('gulp-uglify'),
-     imagemin       = require('gulp-imagemin'),
-     svg2png        = require('gulp-svg2png'),
-     svgSymbols     = require('gulp-svg-symbols'),
-     rename         = require('gulp-rename'),
-     concat         = require('gulp-concat'),
-     notify         = require('gulp-notify'),
-     cache          = require('gulp-cache'),
-     del            = require('del'),
-     critical       = require('critical'),
-     purify         = require('gulp-purifycss');
+ var gulp         = require('gulp'),
+     browserSync  = require('browser-sync').create(),
+     del          = require('del'),
+     critical     = require('critical'),
+     $            = require('gulp-load-plugins')();
 
 
 
@@ -56,23 +44,23 @@
 
 gulp.task('styles', function() {
   return gulp.src('assets/scss/styles.scss')
-  .pipe(sass())
-  .pipe(autoprefixer('last 2 versions', 'Firefox ESR', 'Opera 12.1'))
-  .pipe(minifycss())
+  .pipe($.sass())
+  .pipe($.autoprefixer('last 2 versions', 'Firefox ESR', 'Opera 12.1'))
+  .pipe($.cssnano())
   .pipe(gulp.dest('assets/dist/css'))
   .pipe(browserSync.stream())
-  .pipe(notify({ title: 'Styles', message: 'Task completed' }))
+  .pipe($.notify({ title: 'Styles', message: 'Task completed' }))
 });
 
 gulp.task('styles-ie', function() {
   return gulp.src('assets/scss/ie.scss')
-  .pipe(sass())
-  .pipe(autoprefixer('ie 8', 'ie 9'))
-  .pipe(pixrem({ rootValue: '1em' }))
-  .pipe(minifycss())
+  .pipe($.sass())
+  .pipe($.autoprefixer('ie 8', 'ie 9'))
+  .pipe($.pixrem({ rootValue: '1em' }))
+  .pipe($.cssnano())
   .pipe(gulp.dest('assets/dist/css'))
   .pipe(browserSync.stream())
-  .pipe(notify({ title: 'Styles', message: 'Task completed' }))
+  .pipe($.notify({ title: 'Styles', message: 'Task completed' }))
 });
 
 
@@ -88,22 +76,22 @@ gulp.task('styles-ie', function() {
 
 gulp.task('scripts-head', function() {
   return gulp.src(['assets/js/head.js', 'assets/js/vendor/modernizr.js'])
-  .pipe(concat('head.js'))
-  .pipe(rename({ suffix: '.min' }))
-  .pipe(uglify())
+  .pipe($.concat('head.js'))
+  .pipe($.rename({ suffix: '.min' }))
+  .pipe($.uglify())
   .pipe(gulp.dest('assets/dist/js'))
   .pipe(browserSync.stream())
-  .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
+  .pipe($.notify({ title: 'Scripts', message: 'Task completed' }))
 });
 
 gulp.task('scripts', function() {
   return gulp.src(['node_modules/jquery/dist/jquery.js', 'assets/js/vendor/*.js', 'assets/js/**/*.js', '!assets/js/head.js', '!assets/js/vendor/modernizr.js'])
-  .pipe(concat('main.js'))
-  .pipe(rename({ suffix: '.min' }))
-  .pipe(uglify())
+  .pipe($.concat('main.js'))
+  .pipe($.rename({ suffix: '.min' }))
+  .pipe($.uglify())
   .pipe(gulp.dest('assets/dist/js'))
   .pipe(browserSync.stream())
-  .pipe(notify({ title: 'Scripts', message: 'Task completed' }))
+  .pipe($.notify({ title: 'Scripts', message: 'Task completed' }))
 });
 
 
@@ -117,10 +105,10 @@ gulp.task('scripts', function() {
 
 gulp.task('images', function() {
   return gulp.src('assets/img/**/*')
-  .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+  .pipe($.cache($.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
   .pipe(gulp.dest('assets/dist/img'))
   .pipe(browserSync.stream())
-  .pipe(notify({ title: 'Images', message: 'Task completed' }))
+  .pipe($.notify({ title: 'Images', message: 'Task completed' }))
 });
 
 
@@ -134,20 +122,20 @@ gulp.task('images', function() {
 
 gulp.task('svg2png', function() {
   return gulp.src('assets/img/**/*.svg')
-  .pipe(svg2png())
+  .pipe($.svg2png())
   .pipe(gulp.dest('assets/dist/img/icons/png'))
-  .pipe(notify({ title: 'SVG 2 PNG', message: 'Task completed' }))
+  .pipe($.notify({ title: 'SVG 2 PNG', message: 'Task completed' }))
 });
 
 gulp.task('svg', ['svg2png'], function() {
   return gulp.src('assets/img/**/*.svg')
   .pipe(
-    svgSymbols({
+    $.svgSymbols({
       className: '.icon--%f'
     })
   )
   .pipe(gulp.dest('assets/dist/img/icons'))
-  .pipe(notify({ title: 'SVG', message: 'Task completed' }))
+  .pipe($.notify({ title: 'SVG', message: 'Task completed' }))
 });
 
 
@@ -187,7 +175,7 @@ gulp.task('critical', function() {
 
 gulp.task('purify', function() {
   return gulp.src('assets/dist/css/styles.css')
-  .pipe(purify(['index.html'], { output: false, info: true, rejected: true }));
+  .pipe($.purify(['index.html'], { output: false, info: true, rejected: true }));
 });
 
 
@@ -211,7 +199,7 @@ gulp.task('clean', function() {
  */
 
 gulp.task('clear', function (done) {
-  return cache.clearAll(done);
+  return $.cache.clearAll(done);
 });
 
 
