@@ -175,7 +175,7 @@ gulp.task('critical', function() {
 
 gulp.task('purify', function() {
   return gulp.src('assets/dist/css/styles.css')
-  .pipe($.purify(['index.html'], { output: false, info: true, rejected: true }));
+  .pipe($.purifycss(['index.html'], { output: false, info: true, rejected: true }));
 });
 
 
